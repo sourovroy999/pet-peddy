@@ -1,5 +1,4 @@
 
-console.log('js connected');
 
 
 const loadCategories = () => {
@@ -9,16 +8,13 @@ const loadCategories = () => {
         .catch((error) => console.log(error))
 }
 
-const loadCategoryPets=(id)=>{
-    alert(id)
-    console.log(id);
+const loadCategoryPets = (id) =>{
     
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
             .then((res) => res.json())
-            .then((data) => console.log(data.categories))
-            .catch((error) => console.log(error))
-    
-    }
+            .then((data) => displayPets(data.data))
+            .catch((error) => console.log(error))    
+}
 
 
 
@@ -28,13 +24,17 @@ const displayCategories = (categories) => {
 
 
     categories.forEach((item) => {
-        console.log(item);
+        // console.log(item);
+        // console.log(item.category);
+        
 
         // create a button
         const buttonContainer = document.createElement("div");
         // button.classList = " border rounded-lg";
 
-    //    const names= console.log(item.id);
+    //    const names= console.log(item.category);
+    //    console.log(names);
+       
        
     //    console.log(typeof(item.category));
         
@@ -45,7 +45,7 @@ const displayCategories = (categories) => {
         buttonContainer.innerHTML =
             `
 
-            <button onclick="loadCategoryPets(${item.id})" class="btn">
+            <button onclick="loadCategoryPets('${item.category}')" class="btn">
             <div class="flex h-14 w-40 gap-3 justify-center">
      <img class="mt-2 h-10" src="${item.category_icon}">
      <p class="font-bold justify-items-center my-auto">${item.category}</P>
@@ -87,11 +87,34 @@ const loadPets = () => {
 
 
 const displayPets = (allPets) => {
-    console.log(allPets);
+    // console.log(allPets);
     const petsContainer = document.getElementById("pets-section");
 
+    if(allPets.length === 0){
+        petsContainer.classList.remove("grid", "md:w-4/5")
+        petsContainer.innerHTML=`
+        <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
+
+        <img class="mx-auto" src="images/error.webp">
+
+        <div class="w-3/5 mx-auto items-center justify-center">
+        <h1 class="font-bold text-3xl">No Information Available</h1>
+        <p>Sorry, we don't have any information about this page. We will Update this page as soon as we get information . Thank You. </p>
+        </div>
+
+        </div>
+        
+        `
+        return;
+    }
+    else{
+        petsContainer.classList.add("grid")
+    }
+
+    petsContainer.innerHTML="";
+
     allPets.forEach((pets) => {
-        console.log(pets);
+        // console.log(pets);
         // create a card
         const card = document.createElement("div");
         card.classList = "sm:w-full bg-base-100  shadow-sm"
