@@ -97,9 +97,10 @@ const displayPets = (allPets) => {
 
         <img class="mx-auto" src="images/error.webp">
 
-        <div class="w-3/5 mx-auto items-center justify-center">
-        <h1 class="font-bold text-3xl">No Information Available</h1>
-        <p>Sorry, we don't have any information about this page. We will Update this page as soon as we get information . Thank You. </p>
+        <div class="flex flex-col text-center content-center justify-center">
+
+        <h1 class="font-bold mt-3 text-3xl">No Information Available</h1>
+        <p class="">Sorry, we don't have any information  about this page.<br> We will Update this page as soon as we get information . Thank You. </p>
         </div>
 
         </div>
@@ -108,7 +109,7 @@ const displayPets = (allPets) => {
         return;
     }
     else{
-        petsContainer.classList.add("grid")
+        petsContainer.classList.add("grid", "md:w-4/5")
     }
 
     petsContainer.innerHTML="";
