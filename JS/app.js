@@ -8,11 +8,37 @@ const loadCategories = () => {
         .catch((error) => console.log(error))
 }
 
+const removeActiveClass=()=>{
+    const activeBtnAll=document.getElementsByClassName("category-btn")
+    console.log(activeBtnAll);
+    // activeBtnAll.
+
+    for(let btn of activeBtnAll){
+        btn.classList.remove("active")
+    }
+    
+}
+
+
 const loadCategoryPets = (id) =>{
     
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
             .then((res) => res.json())
-            .then((data) => displayPets(data.data))
+            .then((data) =>{ 
+                //all active class remove 
+                removeActiveClass();
+
+            //add all active class
+            const activeBtn=document.getElementById(`btn-${id}`)
+            console.log(activeBtn);
+
+            activeBtn.classList.add("active")
+            
+
+            displayPets(data.data)
+            
+            })
+                
             .catch((error) => console.log(error))    
 }
 
@@ -45,9 +71,10 @@ const displayCategories = (categories) => {
         buttonContainer.innerHTML =
             `
 
-            <button onclick="loadCategoryPets('${item.category}')" class="btn">
-            <div class="flex h-14 w-40 gap-3 justify-center">
-     <img class="mt-2 h-10" src="${item.category_icon}">
+            <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="category-btn border rounded-xl w-52 h-14">
+
+            <div class="flex gap-3 justify-center">
+     <img class="h-10" src="${item.category_icon}">
      <p class="font-bold justify-items-center my-auto">${item.category}</P>
     </div>
             </button>

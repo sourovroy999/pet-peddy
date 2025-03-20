@@ -1,3 +1,8 @@
 .latto{
     font-family: "Lato", sans-serif;
 }
+
+.active{
+    background-color: #0e79811e;
+    border-radius: 60px;
+}
