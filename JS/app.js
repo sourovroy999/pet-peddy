@@ -8,38 +8,181 @@ const loadCategories = () => {
         .catch((error) => console.log(error))
 }
 
-const removeActiveClass=()=>{
-    const activeBtnAll=document.getElementsByClassName("category-btn")
+const removeActiveClass = () => {
+    const activeBtnAll = document.getElementsByClassName("category-btn")
     console.log(activeBtnAll);
     // activeBtnAll.
 
-    for(let btn of activeBtnAll){
+    for (let btn of activeBtnAll) {
         btn.classList.remove("active")
     }
+
+}
+
+const loadPetImage=async (petId)=>{
+    console.log(petId);
+    
+    const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    displayPetImage(data.petData);
+}
+
+// like button click
+const displayPetImage=(petImg)=>{
+    console.log(petImg);
+    
+    // console.log("clicked like button");
+
+    const likeImages=document.getElementById("selected-pet-section");
+
+    likeImages.innerHTML=`
+       <div class="grid grid-cols-2  gap-1 mt-2 ">
+     <img class="w-40" src=${petImg.image}>
+     </div>
+    `
+
+
+
+
+//     likeImages.forEach((item)=>{
+
+//         item.innerHTML=`
+//   <div class="grid grid-cols-2  gap-1 mt-2 ">
+// <img class="w-40" src=${petImg.image}>
+// </div>
+// `
+//     })
+   
+    
     
 }
 
 
-const loadCategoryPets = (id) =>{
+const detailsTest = {
+
+    "status": true,
+    "message": "successfully fetched pet data using id 2",
+    "petData": {
+        "petId": 2,
+        "breed": "Siamese",
+        "category": "Cat",
+        "date_of_birth": "2022-09-05",
+        "price": 800,
+        "image": "https://i.ibb.co.com/3Wzz41D/pet-2.jpg",
+        "gender": "Female",
+        "pet_details": "This affectionate female Siamese cat is known for her vocal nature and love for attention. Born on September 5, 2022, she enjoys interactive play and snuggles. Fully vaccinated and priced at $800, she's the perfect fit for cat lovers who appreciate an intelligent, engaging, and sociable feline companion.",
+        "vaccinated_status": "Fully",
+        "pet_name": "Mia"
+    }
+
+}
+
+
+const laodDetails = async (petId) => {
+    // const detailsLoad=document.getElementById("dettails-btn")
+    // console.log(detailsLoad);
+
+    const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
+
+    const res = await fetch(url);
+    const data = await res.json();
+    displayDetails(data.petData);
+    displayPetImage(data.petData);
+
+
+
+}
+
+const displayDetails = (petsData) => {
+    console.log(petsData);
+    const detailsContainer = document.getElementById("modal-content");
+
+    detailsContainer.innerHTML = `
+  <div >
+  <img class="w-full rounded-lg" src=${petsData.image} >
+
+  <h1 class="font-bold text-2xl mt-4">${petsData.pet_name}</h1>
+  </div>
+
     
+
+  <div class="grid grid-cols-2 col-auto grid-rows-3 flex-wrap gap-1 mt-2 ">
+   <div class="flex gap-2 mt-2">
+    <img class="h-5 " src="https://img.icons8.com/?size=100&id=n7o8YSGnhNnQ&format=png&color=000000" >
+    <p class="text-center ">Breed: ${petsData.breed}</p>
+   </div>
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=16152&format=png&color=000000" >
+    <p class="text-center ">Birth: ${petsData.date_of_birth}</p>
+   </div>
+
+   
+
+   <div class="flex gap-2 mt-2 ">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=15236&format=png&color=000000" >
+    <p class="text-center mb-1">Gender: ${petsData.gender}</p>
+   </div>
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=85801&format=png&color=000000" >
+    <p class="text-center mb-1">Price: ${petsData.price}</p>
+   </div>
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=ooS0jhPMiVLg&format=png&color=000000" >
+    <p class="text-center mb-1">Vaccinated status: ${petsData.vaccinated_status}</p>
+   </div>
+
+   </div>
+
+
+
+
+   <hr class="mt-3">
+
+   
+   <div >
+   <h3 class="font-bold my-2">Details Information</h3>
+   <p>${petsData.pet_details}</P
+   
+   
+   </div>
+
+
+
+
+  `
+
+    //way-1
+    //   document.getElementById("showModalData").click();
+    //   way-2
+    document.getElementById("customModal").showModal();
+
+}
+
+const loadCategoryPets = (id) => {
+
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-            .then((res) => res.json())
-            .then((data) =>{ 
-                //all active class remove 
-                removeActiveClass();
+        .then((res) => res.json())
+        .then((data) => {
+            //all active class remove 
+            removeActiveClass();
 
             //add all active class
-            const activeBtn=document.getElementById(`btn-${id}`)
+            const activeBtn = document.getElementById(`btn-${id}`)
             console.log(activeBtn);
 
             activeBtn.classList.add("active")
-            
+
 
             displayPets(data.data)
-            
-            })
-                
-            .catch((error) => console.log(error))    
+
+        })
+
+        .catch((error) => console.log(error))
 }
 
 
@@ -52,18 +195,14 @@ const displayCategories = (categories) => {
     categories.forEach((item) => {
         // console.log(item);
         // console.log(item.category);
-        
+
 
         // create a button
         const buttonContainer = document.createElement("div");
         // button.classList = " border rounded-lg";
 
-    //    const names= console.log(item.category);
-    //    console.log(names);
-       
-       
-    //    console.log(typeof(item.category));
-        
+        //    const names= console.log(item.category);
+
 
         // add onclick handler
 
@@ -88,6 +227,8 @@ const displayCategories = (categories) => {
     })
 
 }
+
+
 
 const loadPets = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
@@ -117,9 +258,9 @@ const displayPets = (allPets) => {
     // console.log(allPets);
     const petsContainer = document.getElementById("pets-section");
 
-    if(allPets.length === 0){
+    if (allPets.length === 0) {
         petsContainer.classList.remove("grid", "md:w-4/5")
-        petsContainer.innerHTML=`
+        petsContainer.innerHTML = `
         <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
 
         <img class="mx-auto" src="images/error.webp">
@@ -135,11 +276,11 @@ const displayPets = (allPets) => {
         `
         return;
     }
-    else{
+    else {
         petsContainer.classList.add("grid", "md:w-4/5")
     }
 
-    petsContainer.innerHTML="";
+    petsContainer.innerHTML = "";
 
     allPets.forEach((pets) => {
         // console.log(pets);
@@ -182,12 +323,12 @@ const displayPets = (allPets) => {
    <hr>
 
    <div class="flex justify-between mb-4 mt-4">
-        <button class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
+        <button onclick="loadPetImage(${pets.petId})" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
 
         <button class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Adopt</button>
 
-        <button class="border-[2px] 
+        <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Details</button>
 
    </div
