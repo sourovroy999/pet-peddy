@@ -31,32 +31,61 @@ const loadPetImage=async (petId)=>{
 }
 
 // like button click
-const displayPetImage=(petImg)=>{
-    console.log(petImg);
+// const displayPetImage=(petImg)=>{
+//     console.log(petImg);
     
-    // console.log("clicked like button");
+//     // console.log("clicked like button");
 
+//     const likeImages=document.getElementById("selected-pet-section");
+
+//     likeImages.innerHTML=`
+//        <div class="grid grid-cols-2  gap-1 mt-2 ">
+//      <img class="w-40" src=${petImg.image}>
+//      </div>
+//     `
+
+
+
+
+// //     likeImages.forEach((item)=>{
+
+// //         item.innerHTML=`
+// //   <div class="grid grid-cols-2  gap-1 mt-2 ">
+// // <img class="w-40" src=${petImg.image}>
+// // </div>
+// // `
+// //     })
+   
+   
+// }
+const testPetImage=(petImg)=>{
+    console.log(petImg);
+    const likeImages=document.getElementById("selected-pet-section");
+    
+    const imgElement=document.createElement('img');
+    imgElement.src=`${petImg}`
+
+    // likeImages.classList="grid grid-cols-2  gap-1 mt-2 "
+
+ likeImages.appendChild(imgElement)
+    
+}
+
+const displayPetImage=()=>{
+
+
+}
+
+const testPetImage2=(petImg)=>{
+    console.log(petImg);
     const likeImages=document.getElementById("selected-pet-section");
 
     likeImages.innerHTML=`
-       <div class="grid grid-cols-2  gap-1 mt-2 ">
-     <img class="w-40" src=${petImg.image}>
-     </div>
-    `
-
-
-
-
-//     likeImages.forEach((item)=>{
-
-//         item.innerHTML=`
-//   <div class="grid grid-cols-2  gap-1 mt-2 ">
-// <img class="w-40" src=${petImg.image}>
-// </div>
-// `
-//     })
-   
-    
+    <div class="grid grid-cols-2  gap-1 mt-2 ">
+  <img class="w-40" src=${petImg}>
+  
+  </div>
+ ` 
     
 }
 
@@ -284,6 +313,8 @@ const displayPets = (allPets) => {
 
     allPets.forEach((pets) => {
         // console.log(pets);
+        // console.log(pets.image);
+        
         // create a card
         const card = document.createElement("div");
         card.classList = "sm:w-full bg-base-100  shadow-sm"
@@ -323,7 +354,8 @@ const displayPets = (allPets) => {
    <hr>
 
    <div class="flex justify-between mb-4 mt-4">
-        <button onclick="loadPetImage(${pets.petId})" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
+        <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
+     
 
         <button class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Adopt</button>
