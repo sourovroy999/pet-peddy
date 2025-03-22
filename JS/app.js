@@ -64,10 +64,15 @@ const testPetImage=(petImg)=>{
     
     const imgElement=document.createElement('img');
     imgElement.src=`${petImg}`
+    imgElement.classList.add("w-40")
 
-    // likeImages.classList="grid grid-cols-2  gap-1 mt-2 "
+    likeImages.classList="grid grid-cols-2 md:h-72 gap-1 mt-2 "
 
- likeImages.appendChild(imgElement)
+ likeImages.appendChild(imgElement);
+
+ setTimeout(()=>{
+    likeImages.style.opacity=1;
+ },10)
     
 }
 
