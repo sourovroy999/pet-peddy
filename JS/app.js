@@ -7,7 +7,7 @@ const loadCategories = () => {
         .then((data) => displayCategories(data.categories))
         .catch((error) => console.log(error))
 }
- 
+
 const removeActiveClass = () => {
     const activeBtnAll = document.getElementsByClassName("category-btn")
     console.log(activeBtnAll);
@@ -19,9 +19,9 @@ const removeActiveClass = () => {
 
 }
 
-const loadPetImage=async (petId)=>{
+const loadPetImage = async (petId) => {
     console.log(petId);
-    
+
     const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
 
     const res = await fetch(url);
@@ -33,7 +33,7 @@ const loadPetImage=async (petId)=>{
 // like button click
 // const displayPetImage=(petImg)=>{
 //     console.log(petImg);
-    
+
 //     // console.log("clicked like button");
 
 //     const likeImages=document.getElementById("selected-pet-section");
@@ -55,28 +55,28 @@ const loadPetImage=async (petId)=>{
 // // </div>
 // // `
 // //     })
-   
-   
+
+
 // }
-const testPetImage=(petImg)=>{
+const testPetImage = (petImg) => {
     console.log(petImg);
-    const likeImages=document.getElementById("selected-pet-section");
-    
-    const imgElement=document.createElement('img');
-    imgElement.src=`${petImg}`
+    const likeImages = document.getElementById("selected-pet-section");
+
+    const imgElement = document.createElement('img');
+    imgElement.src = `${petImg}`
     imgElement.classList.add("w-40")
 
-    likeImages.classList="grid grid-cols-2  md:h-72 gap-1 mt-2 "
+    likeImages.classList = "grid grid-cols-2  md:h-72 gap-1 mt-2 "
 
- likeImages.appendChild(imgElement);
+    likeImages.appendChild(imgElement);
 
- setTimeout(()=>{
-    likeImages.style.opacity=1;
- },10)
-    
+    setTimeout(() => {
+        likeImages.style.opacity = 1;
+    }, 10)
+
 }
 
-const displayPetImage=()=>{
+const displayPetImage = () => {
 
 
 }
@@ -86,56 +86,78 @@ const displayPetImage=()=>{
 
 // adopt button function
 
-const adoptBtnClicked=(test)=>{
+const adoptBtnClicked = (test) => {
     console.log("clickeddddddddd");
-
-    document.getElementById("")
-
+    document.getElementById("adopt-btn-main").disabled = true;
 
 
-    let counter=3;
-    const countInterval= setInterval(count, 1000);
-    function count(){
-        console.log(counter--);
-    
-        if(counter<1){
-            clearInterval(countInterval)
-        }
-        
-    }
+
+
+    // let counter=3;
+    // const countInterval= setInterval(count, 1000);
+    // function count(){
+    //    console.log(counter--);
+
+    //     if(counter<1){
+    //         clearInterval(countInterval)
+    //     }
+
+    // }
     // console.log("my", test);
-    
-    
-    const congrats=document.getElementById("congrats-container")
-    congrats.classList.add=("")
-    congrats.innerHTML=`
+
+
+
+
+    const congrats = document.getElementById("congrats-container")
+    congrats.classList.add = ("justify-center")
+
+    congrats.innerHTML = `
     <div>
     <img class=" mx-auto" src="https://img.icons8.com/?size=100&id=q6BlPrJZmxHV&format=png&color=000000">
     </div>
     <h4 class="font-bold text-3xl my-auto">Congratulations</h4>
     <h1>Adoption Process Start For Your Pet</h1>
-    <div id="timer"></div>
+    <div class="text-6xl font-bold" id="timer">3</div>
 
     `
 
-  
- 
+
+
 
     document.getElementById("adopt_modal").showModal();
+    // real
+
+    let count = 3;
+    const countDownElement = document.getElementById("timer");
+
+    const countDownInterval = setInterval(() => {
+        count--;
+        if (count > 0) {
+            countDownElement.textContent = count;
+        } else {
+            clearInterval(countDownInterval);
+        }
+    }, 1000
+
+    )
+    
+
+
+
 }
 
 
-const testPetImage2=(petImg)=>{
+const testPetImage2 = (petImg) => {
     console.log(petImg);
-    const likeImages=document.getElementById("selected-pet-section");
+    const likeImages = document.getElementById("selected-pet-section");
 
-    likeImages.innerHTML=`
+    likeImages.innerHTML = `
     <div class="grid grid-cols-2  gap-1 mt-2 ">
   <img class="w-40" src=${petImg}>
   
   </div>
- ` 
-    
+ `
+
 }
 
 
@@ -243,12 +265,12 @@ const displayDetails = (petsData) => {
 
 }
 
-const loadCategoryPets = (id) => { 
+const loadCategoryPets = (id) => {
 
-    document.getElementById("loading-spiner").style.display="block"
+    document.getElementById("loading-spiner").style.display = "block"
 
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-   
+
 
 
         .then((res) => res.json())
@@ -278,7 +300,7 @@ const displayCategories = (categories) => {
 
 
     categories.forEach((item) => {
-    document.getElementById("loading-spiner").style.display="none"
+        document.getElementById("loading-spiner").style.display = "none"
 
         // console.log(item);
         // console.log(item.category);
@@ -320,7 +342,7 @@ const displayCategories = (categories) => {
 const loadPets = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
 
-   
+
         .then((res) => res.json())
         .then((data) => displayPets(data.pets))
         .catch(error => console.error(error))
@@ -372,11 +394,11 @@ const displayPets = (allPets) => {
     petsContainer.innerHTML = "";
 
     allPets.forEach((pets) => {
-    document.getElementById("loading-spiner").style.display="none";
+        document.getElementById("loading-spiner").style.display = "none";
 
         // console.log(pets);
         // console.log(pets.image);
-        
+
         // create a card
         const card = document.createElement("div");
         card.classList = "sm:w-full bg-base-100  shadow-sm"
@@ -419,7 +441,7 @@ const displayPets = (allPets) => {
         <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
      
 
-        <button onclick="adoptBtnClicked()" class="border-[2px] 
+        <button id="adopt-btn-main" onclick="adoptBtnClicked()" class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Adopt</button>
 
         <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
