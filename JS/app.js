@@ -7,7 +7,7 @@ const loadCategories = () => {
         .then((data) => displayCategories(data.categories))
         .catch((error) => console.log(error))
 }
-
+ 
 const removeActiveClass = () => {
     const activeBtnAll = document.getElementsByClassName("category-btn")
     console.log(activeBtnAll);
@@ -66,7 +66,7 @@ const testPetImage=(petImg)=>{
     imgElement.src=`${petImg}`
     imgElement.classList.add("w-40")
 
-    likeImages.classList="grid grid-cols-2 md:h-72 gap-1 mt-2 "
+    likeImages.classList="grid grid-cols-2  md:h-72 gap-1 mt-2 "
 
  likeImages.appendChild(imgElement);
 
@@ -80,6 +80,50 @@ const displayPetImage=()=>{
 
 
 }
+
+
+
+
+// adopt button function
+
+const adoptBtnClicked=(test)=>{
+    console.log("clickeddddddddd");
+
+    document.getElementById("")
+
+
+
+    let counter=3;
+    const countInterval= setInterval(count, 1000);
+    function count(){
+        console.log(counter--);
+    
+        if(counter<1){
+            clearInterval(countInterval)
+        }
+        
+    }
+    // console.log("my", test);
+    
+    
+    const congrats=document.getElementById("congrats-container")
+    congrats.classList.add=("")
+    congrats.innerHTML=`
+    <div>
+    <img class=" mx-auto" src="https://img.icons8.com/?size=100&id=q6BlPrJZmxHV&format=png&color=000000">
+    </div>
+    <h4 class="font-bold text-3xl my-auto">Congratulations</h4>
+    <h1>Adoption Process Start For Your Pet</h1>
+    <div id="timer"></div>
+
+    `
+
+  
+ 
+
+    document.getElementById("adopt_modal").showModal();
+}
+
 
 const testPetImage2=(petImg)=>{
     console.log(petImg);
@@ -95,29 +139,31 @@ const testPetImage2=(petImg)=>{
 }
 
 
-const detailsTest = {
+// const detailsTest = {
 
-    "status": true,
-    "message": "successfully fetched pet data using id 2",
-    "petData": {
-        "petId": 2,
-        "breed": "Siamese",
-        "category": "Cat",
-        "date_of_birth": "2022-09-05",
-        "price": 800,
-        "image": "https://i.ibb.co.com/3Wzz41D/pet-2.jpg",
-        "gender": "Female",
-        "pet_details": "This affectionate female Siamese cat is known for her vocal nature and love for attention. Born on September 5, 2022, she enjoys interactive play and snuggles. Fully vaccinated and priced at $800, she's the perfect fit for cat lovers who appreciate an intelligent, engaging, and sociable feline companion.",
-        "vaccinated_status": "Fully",
-        "pet_name": "Mia"
-    }
+//     "status": true,
+//     "message": "successfully fetched pet data using id 2",
+//     "petData": {
+//         "petId": 2,
+//         "breed": "Siamese",
+//         "category": "Cat",
+//         "date_of_birth": "2022-09-05",
+//         "price": 800,
+//         "image": "https://i.ibb.co.com/3Wzz41D/pet-2.jpg",
+//         "gender": "Female",
+//         "pet_details": "This affectionate female Siamese cat is known for her vocal nature and love for attention. Born on September 5, 2022, she enjoys interactive play and snuggles. Fully vaccinated and priced at $800, she's the perfect fit for cat lovers who appreciate an intelligent, engaging, and sociable feline companion.",
+//         "vaccinated_status": "Fully",
+//         "pet_name": "Mia"
+//     }
 
-}
+// }
 
 
 const laodDetails = async (petId) => {
     // const detailsLoad=document.getElementById("dettails-btn")
     // console.log(detailsLoad);
+
+
 
     const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
 
@@ -197,9 +243,14 @@ const displayDetails = (petsData) => {
 
 }
 
-const loadCategoryPets = (id) => {
+const loadCategoryPets = (id) => { 
+
+    document.getElementById("loading-spiner").style.display="block"
 
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+   
+
+
         .then((res) => res.json())
         .then((data) => {
             //all active class remove 
@@ -227,6 +278,8 @@ const displayCategories = (categories) => {
 
 
     categories.forEach((item) => {
+    document.getElementById("loading-spiner").style.display="none"
+
         // console.log(item);
         // console.log(item.category);
 
@@ -266,6 +319,8 @@ const displayCategories = (categories) => {
 
 const loadPets = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
+
+   
         .then((res) => res.json())
         .then((data) => displayPets(data.pets))
         .catch(error => console.error(error))
@@ -317,6 +372,8 @@ const displayPets = (allPets) => {
     petsContainer.innerHTML = "";
 
     allPets.forEach((pets) => {
+    document.getElementById("loading-spiner").style.display="none";
+
         // console.log(pets);
         // console.log(pets.image);
         
@@ -362,7 +419,7 @@ const displayPets = (allPets) => {
         <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
      
 
-        <button class="border-[2px] 
+        <button onclick="adoptBtnClicked()" class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Adopt</button>
 
         <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
