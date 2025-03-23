@@ -139,7 +139,7 @@
    <!-- Open the modal using ID.showModal() method -->
 <button class="btn hidden" onclick="adopt_modal.showModal()">open modal</button>
 <dialog id="adopt_modal" class="modal">
-  <div class="modal-box  sm:w-full md:w-5/12 max-w-3xl">
+  <div id="congrats-modal"  class=" modal-box  sm:w-full md:w-5/12 max-w-3xl">
     
     <div class="flex gap-3 flex-col items-center justify-center" id="congrats-container">
 
@@ -149,7 +149,7 @@
 
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
-        <button class="btn"></button>
+        <button id="esc-btn" class="btn hidden"></button>
       </form>
     </div>
   </div>

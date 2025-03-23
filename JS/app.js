@@ -134,13 +134,23 @@ const adoptBtnClicked = (test) => {
         count--;
         if (count > 0) {
             countDownElement.textContent = count;
-        } else {
-            clearInterval(countDownInterval);
+            
         }
+      
+        
+        else{
+            clearInterval(countDownInterval);
+           
+        }
+        if (count==0){
+            
+                document.getElementById("esc-btn").click()
+            }
+        
     }, 1000
 
     )
-    
+
 
 
 
