@@ -389,6 +389,12 @@ const displayPets = (allPets) => {
     const petsCollection=allPets
     console.log(petsCollection);
 
+    const sortedPrices=petsCollection.sort(function(a,b){
+        return b.price-a.price; 
+    })
+    console.log(sortedPrices);
+    
+
 //     const all=petsCollection.map(p=>{
 //        prices= petsCollection.map(p=>p.price);
 //     console.log(prices);
@@ -399,10 +405,20 @@ const displayPets = (allPets) => {
 // //    console.log(sortedPrice);
 //     })
 //     console.log(all);
-    const all=petsCollection.map(sortedCollection)
-    console.log(all);
+    // const all=petsCollection.map(sortedCollection)
 
-    
+
+//     console.log(all);
+
+//     const sortedCollection=()=>{
+        
+// //     const prices=petsCollection.map(p=>p.price);
+// //     console.log(prices);
+
+// //    const sortedPrice= prices.sort(function(a, b){return b-a});
+//     }
+
+
     
 
     // const prices=petsCollection.map(p=>p.price);
