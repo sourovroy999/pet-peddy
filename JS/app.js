@@ -88,7 +88,6 @@ const displayPetImage = () => {
 
 const adoptBtnClicked = (test) => {
     console.log("clickeddddddddd");
-    document.getElementById("adopt-btn-main").disabled = true;
 
 
 
@@ -145,6 +144,7 @@ const adoptBtnClicked = (test) => {
         if (count==0){
             
                 document.getElementById("esc-btn").click()
+
             }
         
     }, 1000
@@ -152,9 +152,16 @@ const adoptBtnClicked = (test) => {
     )
 
 
+    // document.getElementById("adopt-btn-main").addEventListener("click", function() {
+    //     this.disabled = true;
+    // });
 
 
+    
+    // disableBtbFn()
 }
+
+
 
 
 const testPetImage2 = (petImg) => {
@@ -375,8 +382,47 @@ const loadPets = () => {
 // }]]]
 
 
+
+
 const displayPets = (allPets) => {
-    // console.log(allPets);
+
+    const petsCollection=allPets
+    console.log(petsCollection);
+
+//     const all=petsCollection.map(p=>{
+//        prices= petsCollection.map(p=>p.price);
+//     console.log(prices);
+
+//     const sortedPrice= prices.sort(function(a, b){return b-a});
+//    console.log(sortedPrice);
+// //     .sort(function(a, b){return b-a});
+// //    console.log(sortedPrice);
+//     })
+//     console.log(all);
+    const all=petsCollection.map(sortedCollection)
+    console.log(all);
+
+    
+    
+
+    // const prices=petsCollection.map(p=>p.price);
+    // console.log(prices);
+
+//    const sortedPrice= prices.sort(function(a, b){return b-a});
+//    console.log(sortedPrice);
+   
+
+    
+
+    // const sortingPrice=allPets[0].price;
+    // const sortingPrice1=allPets[1].price;
+    // const sortingPrice2=allPets[2].price;
+    // console.log(sortingPrice);
+
+    // sortingPrice.sort(function(a, b){return b-a});
+
+
+
     const petsContainer = document.getElementById("pets-section");
 
     if (allPets.length === 0) {
@@ -404,7 +450,30 @@ const displayPets = (allPets) => {
     petsContainer.innerHTML = "";
 
     allPets.forEach((pets) => {
+
+        // console.log(pets);
+        
+    // const sortingPrice=pets.price;
+    // console.log(sortingPrice);
+    // const arr=[sortingPrice]
+    // console.log(arr);
+
+
+
+
+    
+    
+
+   
+   
+    
+
+
+    insideAllPets(pets)
+
         document.getElementById("loading-spiner").style.display = "none";
+
+
 
         // console.log(pets);
         // console.log(pets.image);
@@ -451,8 +520,8 @@ const displayPets = (allPets) => {
         <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
      
 
-        <button id="adopt-btn-main" onclick="adoptBtnClicked()" class="border-[2px] 
-        border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Adopt</button>
+        <button id="adopt-btn-main" onclick="adoptBtnClicked(); disableBtbFn()" class="border-[2px] 
+        border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10  disabled:bg-gray-400 disabled:cursor-not-allowed" >Adopt</button>
 
         <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Details</button>
@@ -467,10 +536,40 @@ const displayPets = (allPets) => {
         //  append card
         petsContainer.append(card)
 
+        // all price list
+
+        // console.log(pets.price);
+        
+
 
     })
 
 }
+
+// const disableBtbFn=()=>{
+//     document.getElementById("adopt-btn-main").disabled = true;
+
+// }
+
+function disableBtbFn(){
+    document.getElementById("adopt-btn-main").disabled = true;
+
+}
+
+const sortBtnFn=(prices)=>{
+    // console.log("sortedd");
+    // console.log(prices.price);
+    
+   
+    
+}
+
+const insideAllPets=(data)=>{
+    // console.log(data);
+    sortBtnFn(data)
+    
+}
+
 
 
 
