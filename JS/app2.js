@@ -86,7 +86,7 @@ const displayPetImage = () => {
 
 // adopt button function
 
-const adoptBtnClicked = (petsId) => {
+const adoptBtnClicked = (test) => {
     console.log("clickeddddddddd");
 
 
@@ -133,31 +133,31 @@ const adoptBtnClicked = (petsId) => {
         count--;
         if (count > 0) {
             countDownElement.textContent = count;
-
+            
         }
-
-
-        else {
+      
+        
+        else{
             clearInterval(countDownInterval);
-
+           
         }
-        if (count == 0) {
+        if (count==0){
+            
+                document.getElementById("esc-btn").click()
 
-            document.getElementById("esc-btn").click()
-
-        }
-
+            }
+        
     }, 1000
 
     )
 
 
-    document.getElementById(petsId).addEventListener("click", function() {
-        this.disabled = true;
-    });
+    // document.getElementById("adopt-btn-main").addEventListener("click", function() {
+    //     this.disabled = true;
+    // });
 
 
-
+    
     // disableBtbFn()
 }
 
@@ -354,19 +354,14 @@ const displayCategories = (categories) => {
 
 }
 
-let allPets;
+
 
 const loadPets = () => {
-
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
 
 
         .then((res) => res.json())
-        .then((data) => {
-            allPets=data.pets;
-            // displayPets(data.pets)
-            displayPets()
-        })
+        .then((data) => displayPets(data.pets))
         .catch(error => console.error(error))
 
 }
@@ -386,78 +381,72 @@ const loadPets = () => {
 
 // }]]]
 
-const sortClicked=()=>{
-    // console.log('clicked');
-    // const sortClicked2=(allPets)=>{
-    //     const petsCollection=allPets
+
+
+
+const displayPets = (allPets) => {
+
+    // sorting the array of objects
+
+    const sortBtnFn=(allPets)=>{
+            // console.log("sortedd");
+            // console.log(prices.price);
+
+            const petsCollection=allPets
+            console.log(petsCollection);
+        
+            const sortedPrices=petsCollection.sort(function(a,b){
+                return b.price-a.price; 
+            })
+            console.log(sortedPrices);
+            
+           
+            
+        }
+
+    // const petsCollection=allPets
     // console.log(petsCollection);
-    const petsCollection=allPets
-    const sortedPrices=petsCollection.sort(function(a,b){
-        return b.price-a.price; 
-    })
-    console.log(sortedPrices);
 
-    
-
-    
-    return
-}
-
-
-const displayPets = () => {
-    console.log(allPets);
-    // sortClicked(allPets)
-    // console.log(petsCollection);
-
-    // const petsCollection = allPets
-    // const sortedPrices = petsCollection.sort(function (a, b) {
-    //     return b.price - a.price;
+    // const sortedPrices=petsCollection.sort(function(a,b){
+    //     return b.price-a.price; 
     // })
     // console.log(sortedPrices);
+    
 
+//     const all=petsCollection.map(p=>{
+//        prices= petsCollection.map(p=>p.price);
+//     console.log(prices);
 
-
-    // sorting array of objects by price
-
-
-
-
-
-
-    //     const all=petsCollection.map(p=>{
-    //        prices= petsCollection.map(p=>p.price);
-    //     console.log(prices);
-
-    //     const sortedPrice= prices.sort(function(a, b){return b-a});
-    //    console.log(sortedPrice);
-    // //     .sort(function(a, b){return b-a});
-    // //    console.log(sortedPrice);
-    //     })
-    //     console.log(all);
+//     const sortedPrice= prices.sort(function(a, b){return b-a});
+//    console.log(sortedPrice);
+// //     .sort(function(a, b){return b-a});
+// //    console.log(sortedPrice);
+//     })
+//     console.log(all);
     // const all=petsCollection.map(sortedCollection)
 
 
-    //     console.log(all);
+//     console.log(all);
 
-    //     const sortedCollection=()=>{
+//     const sortedCollection=()=>{
+        
+// //     const prices=petsCollection.map(p=>p.price);
+// //     console.log(prices);
 
-    // //     const prices=petsCollection.map(p=>p.price);
-    // //     console.log(prices);
-
-    // //    const sortedPrice= prices.sort(function(a, b){return b-a});
-    //     }
+// //    const sortedPrice= prices.sort(function(a, b){return b-a});
+//     }
 
 
-
+    
 
     // const prices=petsCollection.map(p=>p.price);
     // console.log(prices);
 
-    //    const sortedPrice= prices.sort(function(a, b){return b-a});
-    //    console.log(sortedPrice);
+//    const sortedPrice= prices.sort(function(a, b){return b-a});
+//    console.log(sortedPrice);
+   
 
-
-
+    
 
     // const sortingPrice=allPets[0].price;
     // const sortingPrice1=allPets[1].price;
@@ -497,24 +486,24 @@ const displayPets = () => {
     allPets.forEach((pets) => {
 
         // console.log(pets);
-
-        // const sortingPrice=pets.price;
-        // console.log(sortingPrice);
-        // const arr=[sortingPrice]
-        // console.log(arr);
-
-
+        
+    // const sortingPrice=pets.price;
+    // console.log(sortingPrice);
+    // const arr=[sortingPrice]
+    // console.log(arr);
 
 
 
 
+    
+    
+
+   
+   
+    
 
 
-
-
-
-
-        insideAllPets(pets)
+    insideAllPets(pets)
 
         document.getElementById("loading-spiner").style.display = "none";
 
@@ -565,7 +554,7 @@ const displayPets = () => {
         <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
      
 
-        <button id="${pets.petId}" onclick="adoptBtnClicked(${pets.petId}); disableBtbFn()" class="border-[2px] 
+        <button id="adopt-btn-main" onclick="adoptBtnClicked(); disableBtbFn()" class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10  disabled:bg-gray-400 disabled:cursor-not-allowed" >Adopt</button>
 
         <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
@@ -584,7 +573,7 @@ const displayPets = () => {
         // all price list
 
         // console.log(pets.price);
-
+        
 
 
     })
@@ -596,7 +585,7 @@ const displayPets = () => {
 
 // }
 
-function disableBtbFn() {
+function disableBtbFn(){
     document.getElementById("adopt-btn-main").disabled = true;
 
 }
@@ -604,16 +593,16 @@ function disableBtbFn() {
 // const sortBtnFn=(prices)=>{
 //     // console.log("sortedd");
 //     // console.log(prices.price);
-
-
-
+    
+   
+    
 // }
 
-const insideAllPets = (data) => {
-    // console.log(data);
-    // sortBtnFn(data)
-
-}
+// const insideAllPets=(data)=>{
+//     // console.log(data);
+//     sortBtnFn(data)
+    
+// }
 
 
 
