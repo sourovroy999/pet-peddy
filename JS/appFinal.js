@@ -86,7 +86,7 @@ const displayPetImage = () => {
 
 // adopt button function
 
-const adoptBtnClicked = (test) => {
+const adoptBtnClicked = (petsId) => {
     console.log("clickeddddddddd");
 
 
@@ -133,31 +133,31 @@ const adoptBtnClicked = (test) => {
         count--;
         if (count > 0) {
             countDownElement.textContent = count;
-            
-        }
-      
-        
-        else{
-            clearInterval(countDownInterval);
-           
-        }
-        if (count==0){
-            
-                document.getElementById("esc-btn").click()
 
-            }
-        
+        }
+
+
+        else {
+            clearInterval(countDownInterval);
+
+        }
+        if (count == 0) {
+
+            document.getElementById("esc-btn").click()
+
+        }
+
     }, 1000
 
     )
 
 
-    // document.getElementById("adopt-btn-main").addEventListener("click", function() {
-    //     this.disabled = true;
-    // });
+    document.getElementById(petsId).addEventListener("click", function() {
+        this.disabled = true;
+    });
 
 
-    
+
     // disableBtbFn()
 }
 
@@ -283,6 +283,8 @@ const displayDetails = (petsData) => {
 }
 
 const loadCategoryPets = (id) => {
+    console.log(id);
+    
 
     document.getElementById("loading-spiner").style.display = "block"
 
@@ -302,7 +304,7 @@ const loadCategoryPets = (id) => {
             activeBtn.classList.add("active")
 
 
-            displayPets(data.data)
+            displayCatagoryWisePet(data.data)
 
         })
 
@@ -325,14 +327,7 @@ const displayCategories = (categories) => {
 
         // create a button
         const buttonContainer = document.createElement("div");
-        // button.classList = " border rounded-lg";
-
-        //    const names= console.log(item.category);
-
-
-        // add onclick handler
-
-        // button.innerText=item.category;
+        
         buttonContainer.innerHTML =
             `
 
@@ -355,13 +350,21 @@ const displayCategories = (categories) => {
 }
 
 
+let allPets;
 
 const loadPets = () => {
+
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
 
 
         .then((res) => res.json())
-        .then((data) => displayPets(data.pets))
+        .then((data) => {
+            allPets=data.pets;
+            console.log(allPets);
+            
+            // displayPets(data.pets)
+            displayPets()
+        })
         .catch(error => console.error(error))
 
 }
@@ -381,136 +384,57 @@ const loadPets = () => {
 
 // }]]]
 
+let sortedPrices=[];
 
-
-
-const displayPets = (allPets) => {
-
-    // sorting the array of objects
-
-    const sortBtnFn=(allPets)=>{
-            // console.log("sortedd");
-            // console.log(prices.price);
-
-            const petsCollection=allPets
-            console.log(petsCollection);
-        
-            const sortedPrices=petsCollection.sort(function(a,b){
-                return b.price-a.price; 
-            })
-            console.log(sortedPrices);
-            
-           
-            
-        }
-
+const sortClicked=()=>{
+    console.log('clicked');
+    
     // const petsCollection=allPets
-    // console.log(petsCollection);
-
     // const sortedPrices=petsCollection.sort(function(a,b){
     //     return b.price-a.price; 
     // })
-    // console.log(sortedPrices);
+    
+    sortedPrices = [...allPets].sort((a, b) => b.price - a.price);
+    console.log(sortedPrices);
+    displaySortWise()
     
 
-//     const all=petsCollection.map(p=>{
-//        prices= petsCollection.map(p=>p.price);
-//     console.log(prices);
+}
 
-//     const sortedPrice= prices.sort(function(a, b){return b-a});
-//    console.log(sortedPrice);
-// //     .sort(function(a, b){return b-a});
-// //    console.log(sortedPrice);
-//     })
-//     console.log(all);
-    // const all=petsCollection.map(sortedCollection)
-
-
-//     console.log(all);
-
-//     const sortedCollection=()=>{
-        
-// //     const prices=petsCollection.map(p=>p.price);
-// //     console.log(prices);
-
-// //    const sortedPrice= prices.sort(function(a, b){return b-a});
-//     }
-
-
-    
-
-    // const prices=petsCollection.map(p=>p.price);
-    // console.log(prices);
-
-//    const sortedPrice= prices.sort(function(a, b){return b-a});
-//    console.log(sortedPrice);
-   
-
-    
-
-    // const sortingPrice=allPets[0].price;
-    // const sortingPrice1=allPets[1].price;
-    // const sortingPrice2=allPets[2].price;
-    // console.log(sortingPrice);
-
-    // sortingPrice.sort(function(a, b){return b-a});
-
-
-
+const displaySortWise=()=>{
+    console.log(sortedPrices);
     const petsContainer = document.getElementById("pets-section");
 
-    if (allPets.length === 0) {
-        petsContainer.classList.remove("grid", "md:w-4/5")
-        petsContainer.innerHTML = `
-        <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
+    // if (allPets.length === 0) {
+    //     petsContainer.classList.remove("grid", "md:w-4/5")
+    //     petsContainer.innerHTML = `
+    //     <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
 
-        <img class="mx-auto" src="images/error.webp">
+    //     <img class="mx-auto" src="images/error.webp">
 
-        <div class="flex flex-col text-center content-center justify-center">
+    //     <div class="flex flex-col text-center content-center justify-center">
 
-        <h1 class="font-bold mt-3 text-3xl">No Information Available</h1>
-        <p class="">Sorry, we don't have any information  about this page.<br> We will Update this page as soon as we get information . Thank You. </p>
-        </div>
+    //     <h1 class="font-bold mt-3 text-3xl">No Information Available</h1>
+    //     <p class="">Sorry, we don't have any information  about this page.<br> We will Update this page as soon as we get information . Thank You. </p>
+    //     </div>
 
-        </div>
+    //     </div>
         
-        `
-        return;
-    }
-    else {
-        petsContainer.classList.add("grid", "md:w-4/5")
-    }
+    //     `
+    //     return;
+    // }
+    // else {
+    //     petsContainer.classList.add("grid", "md:w-4/5")
+    // }
 
     petsContainer.innerHTML = "";
 
-    allPets.forEach((pets) => {
+    sortedPrices.forEach((pets) => {
 
-        // console.log(pets);
-        
-    // const sortingPrice=pets.price;
-    // console.log(sortingPrice);
-    // const arr=[sortingPrice]
-    // console.log(arr);
-
-
-
-
-    
-    
-
-   
-   
-    
-
-
-    insideAllPets(pets)
+      insideAllPets(pets)
 
         document.getElementById("loading-spiner").style.display = "none";
 
-
-
-        // console.log(pets);
-        // console.log(pets.image);
 
         // create a card
         const card = document.createElement("div");
@@ -554,7 +478,7 @@ const displayPets = (allPets) => {
         <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
      
 
-        <button id="adopt-btn-main" onclick="adoptBtnClicked(); disableBtbFn()" class="border-[2px] 
+        <button id="${pets.petId}" onclick="adoptBtnClicked(${pets.petId}); disableBtbFn()" class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10  disabled:bg-gray-400 disabled:cursor-not-allowed" >Adopt</button>
 
         <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
@@ -573,7 +497,228 @@ const displayPets = (allPets) => {
         // all price list
 
         // console.log(pets.price);
+
+
+
+    })
+    
+
+}
+
+// show category wise pets in the hero section
+
+const displayCatagoryWisePet=(iPets)=>{
+    console.log(iPets);
+    // sortClicked()
+
+    
+
+    const petsContainer = document.getElementById("pets-section");
+
+    if (iPets.length === 0) {
+        petsContainer.classList.remove("grid", "md:w-4/5")
+        petsContainer.innerHTML = `
+        <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
+
+        <img class="mx-auto" src="images/error.webp">
+
+        <div class="flex flex-col text-center content-center justify-center">
+
+        <h1 class="font-bold mt-3 text-3xl">No Information Available</h1>
+        <p class="">Sorry, we don't have any information  about this page.<br> We will Update this page as soon as we get information . Thank You. </p>
+        </div>
+
+        </div>
         
+        `
+        return;
+    }
+    else {
+        petsContainer.classList.add("grid", "md:w-4/5")
+    }
+
+    petsContainer.innerHTML = "";
+
+    iPets.forEach((pets) => {
+
+    //   insideAllPets(pets)
+
+        document.getElementById("loading-spiner").style.display = "none";
+
+
+        // create a card
+        const card = document.createElement("div");
+        card.classList = "sm:w-full bg-base-100  shadow-sm"
+        card.innerHTML =
+            `
+             <figure class=" p-4">
+    <img class="border-0 object-cover rounded-md"
+      src="${pets.image}" />
+  </figure>
+  <div class="px-4">
+    <h2 class="font-bold text-3xl">
+      ${pets.pet_name}
+      
+    </h2>
+    
+   <div class="flex gap-2 mt-2 justify-items-center">
+    <img class="h-5 mt-[1.5px]" src="https://img.icons8.com/?size=100&id=n7o8YSGnhNnQ&format=png&color=000000" >
+    <p class="text-center ">Breed: ${pets.breed}</p>
+   </div>
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=16152&format=png&color=000000" >
+    <p class="text-center mb-1">Birth: ${pets.date_of_birth}</p>
+   </div>
+
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=15236&format=png&color=000000" >
+    <p class="text-center mb-1">Gender: ${pets.gender}</p>
+   </div>
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=85801&format=png&color=000000" >
+    <p class="text-center mb-1">Price: ${pets.price}</p>
+   </div>
+
+   <hr>
+
+   <div class="flex justify-between mb-4 mt-4">
+        <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
+     
+
+        <button id="${pets.petId}" onclick="adoptBtnClicked(${pets.petId}); disableBtbFn()" class="border-[2px] 
+        border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10  disabled:bg-gray-400 disabled:cursor-not-allowed" >Adopt</button>
+
+        <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
+        border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Details</button>
+
+   </div
+
+
+  </div>
+
+     `
+
+        //  append card
+        petsContainer.append(card)
+
+        // all price list
+
+        // console.log(pets.price);
+
+
+
+    })
+    
+    
+}
+
+
+// display all pets
+const displayPets = () => {
+    console.log(allPets);
+    // sortClicked()
+    
+
+
+
+    const petsContainer = document.getElementById("pets-section");
+
+    // if (allPets.length === 0) {
+    //     petsContainer.classList.remove("grid", "md:w-4/5")
+    //     petsContainer.innerHTML = `
+    //     <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
+
+    //     <img class="mx-auto" src="images/error.webp">
+
+    //     <div class="flex flex-col text-center content-center justify-center">
+
+    //     <h1 class="font-bold mt-3 text-3xl">No Information Available</h1>
+    //     <p class="">Sorry, we don't have any information  about this page.<br> We will Update this page as soon as we get information . Thank You. </p>
+    //     </div>
+
+    //     </div>
+        
+    //     `
+    //     return;
+    // }
+    // else {
+    //     petsContainer.classList.add("grid", "md:w-4/5")
+    // }
+
+    petsContainer.innerHTML = "";
+
+    allPets.forEach((pets) => {
+
+      insideAllPets(pets)
+
+        document.getElementById("loading-spiner").style.display = "none";
+
+
+        // create a card
+        const card = document.createElement("div");
+        card.classList = "sm:w-full bg-base-100  shadow-sm"
+        card.innerHTML =
+            `
+             <figure class=" p-4">
+    <img class="border-0 object-cover rounded-md"
+      src="${pets.image}" />
+  </figure>
+  <div class="px-4">
+    <h2 class="font-bold text-3xl">
+      ${pets.pet_name}
+      
+    </h2>
+    
+   <div class="flex gap-2 mt-2 justify-items-center">
+    <img class="h-5 mt-[1.5px]" src="https://img.icons8.com/?size=100&id=n7o8YSGnhNnQ&format=png&color=000000" >
+    <p class="text-center ">Breed: ${pets.breed}</p>
+   </div>
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=16152&format=png&color=000000" >
+    <p class="text-center mb-1">Birth: ${pets.date_of_birth}</p>
+   </div>
+
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=15236&format=png&color=000000" >
+    <p class="text-center mb-1">Gender: ${pets.gender}</p>
+   </div>
+
+   <div class="flex gap-2 mt-2">
+    <img class="h-5" src="https://img.icons8.com/?size=100&id=85801&format=png&color=000000" >
+    <p class="text-center mb-1">Price: ${pets.price}</p>
+   </div>
+
+   <hr>
+
+   <div class="flex justify-between mb-4 mt-4">
+        <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
+     
+
+        <button id="${pets.petId}" onclick="adoptBtnClicked(${pets.petId}); disableBtbFn()" class="border-[2px] 
+        border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10  disabled:bg-gray-400 disabled:cursor-not-allowed" >Adopt</button>
+
+        <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
+        border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10">Details</button>
+
+   </div
+
+
+  </div>
+
+     `
+
+        //  append card
+        petsContainer.append(card)
+
+        // all price list
+
+        // console.log(pets.price);
+
 
 
     })
@@ -585,7 +730,7 @@ const displayPets = (allPets) => {
 
 // }
 
-function disableBtbFn(){
+function disableBtbFn() {
     document.getElementById("adopt-btn-main").disabled = true;
 
 }
@@ -593,16 +738,16 @@ function disableBtbFn(){
 // const sortBtnFn=(prices)=>{
 //     // console.log("sortedd");
 //     // console.log(prices.price);
-    
-   
-    
+
+
+
 // }
 
-// const insideAllPets=(data)=>{
-//     // console.log(data);
-//     sortBtnFn(data)
-    
-// }
+const insideAllPets = (data) => {
+    // console.log(data);
+    // sortBtnFn(data)
+
+}
 
 
 
