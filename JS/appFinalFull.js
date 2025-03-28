@@ -38,7 +38,7 @@ const testPetImage = (petImg) => {
     const imgElement = document.createElement('img');
     imgElement.src = `${petImg}`
     imgElement.classList.add("w-40")
-    imgElement.classList.add(  "rounded")
+    imgElement.classList.add("rounded")
 
     likeImages.classList = "grid grid-cols-2 h-fit gap-2"
 
@@ -398,6 +398,8 @@ const displaySortWise=()=>{
 // show category wise pets in the hero section
 
 const displayCatagoryWisePet=(iPets)=>{
+
+   
     console.log(iPets);
     // sortClicked()
 
@@ -500,9 +502,16 @@ const displayCatagoryWisePet=(iPets)=>{
 
 
     })
+
+    
     
     
 }
+
+setTimeout(() => {
+    displayCatagoryWisePet()
+    
+}, 3000);
 
 
 
@@ -535,8 +544,8 @@ const displayPets = () => {
         card.classList = "sm:w-full bg-base-100  shadow-sm"
         card.innerHTML =
             `
-             <figure class=" p-4">
-    <img class="border-0 object-cover rounded-md"
+             <figure class=" p-4 ">
+    <img class="border-0 object-cover rounded-md "
       src="${pets.image}" />
   </figure>
   <div class="px-4">
