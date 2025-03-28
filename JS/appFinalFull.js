@@ -519,27 +519,7 @@ const displayPets = () => {
 
     const petsContainer = document.getElementById("pets-section");
 
-    // if (allPets.length === 0) {
-    //     petsContainer.classList.remove("grid", "md:w-4/5")
-    //     petsContainer.innerHTML = `
-    //     <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
-
-    //     <img class="mx-auto" src="images/error.webp">
-
-    //     <div class="flex flex-col text-center content-center justify-center">
-
-    //     <h1 class="font-bold mt-3 text-3xl">No Information Available</h1>
-    //     <p class="">Sorry, we don't have any information  about this page.<br> We will Update this page as soon as we get information . Thank You. </p>
-    //     </div>
-
-    //     </div>
-        
-    //     `
-    //     return;
-    // }
-    // else {
-    //     petsContainer.classList.add("grid", "md:w-4/5")
-    // }
+  
 
     petsContainer.innerHTML = "";
 
@@ -608,9 +588,7 @@ const displayPets = () => {
         //  append card
         petsContainer.append(card)
 
-        // all price list
-
-        // console.log(pets.price);
+      
 
 
 
@@ -630,8 +608,7 @@ function disableBtbFn() {
 
 
 const insideAllPets = (data) => {
-    // console.log(data);
-    // sortBtnFn(data)
+    
 
 }
 
