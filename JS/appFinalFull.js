@@ -30,34 +30,7 @@ const loadPetImage = async (petId) => {
     displayPetImage(data.petData);
 }
 
-// like button click
-// const displayPetImage=(petImg)=>{
-//     console.log(petImg);
 
-//     // console.log("clicked like button");
-
-//     const likeImages=document.getElementById("selected-pet-section");
-
-//     likeImages.innerHTML=`
-//        <div class="grid grid-cols-2  gap-1 mt-2 ">
-//      <img class="w-40" src=${petImg.image}>
-//      </div>
-//     `
-
-
-
-
-// //     likeImages.forEach((item)=>{
-
-// //         item.innerHTML=`
-// //   <div class="grid grid-cols-2  gap-1 mt-2 ">
-// // <img class="w-40" src=${petImg.image}>
-// // </div>
-// // `
-// //     })
-
-
-// }
 const testPetImage = (petImg) => {
     console.log(petImg);
     const likeImages = document.getElementById("selected-pet-section");
@@ -65,8 +38,9 @@ const testPetImage = (petImg) => {
     const imgElement = document.createElement('img');
     imgElement.src = `${petImg}`
     imgElement.classList.add("w-40")
+    imgElement.classList.add(  "rounded")
 
-    likeImages.classList = "grid grid-cols-2  md:h-72 gap-1 mt-2 "
+    likeImages.classList = "grid grid-cols-2 h-fit gap-2"
 
     likeImages.appendChild(imgElement);
 
@@ -87,26 +61,8 @@ const displayPetImage = () => {
 // adopt button function
 
 const adoptBtnClicked = (petsId) => {
-    console.log("clickeddddddddd");
-
-
-
-
-    // let counter=3;
-    // const countInterval= setInterval(count, 1000);
-    // function count(){
-    //    console.log(counter--);
-
-    //     if(counter<1){
-    //         clearInterval(countInterval)
-    //     }
-
-    // }
-    // console.log("my", test);
-
-
-
-
+    console.log(petsId);
+    
     const congrats = document.getElementById("congrats-container")
     congrats.classList.add = ("justify-center")
 
@@ -158,44 +114,12 @@ const adoptBtnClicked = (petsId) => {
 
 
 
-    // disableBtbFn()
-}
-
-
-
-
-const testPetImage2 = (petImg) => {
-    console.log(petImg);
-    const likeImages = document.getElementById("selected-pet-section");
-
-    likeImages.innerHTML = `
-    <div class="grid grid-cols-2  gap-1 mt-2 ">
-  <img class="w-40" src=${petImg}>
-  
-  </div>
- `
 
 }
 
 
-// const detailsTest = {
 
-//     "status": true,
-//     "message": "successfully fetched pet data using id 2",
-//     "petData": {
-//         "petId": 2,
-//         "breed": "Siamese",
-//         "category": "Cat",
-//         "date_of_birth": "2022-09-05",
-//         "price": 800,
-//         "image": "https://i.ibb.co.com/3Wzz41D/pet-2.jpg",
-//         "gender": "Female",
-//         "pet_details": "This affectionate female Siamese cat is known for her vocal nature and love for attention. Born on September 5, 2022, she enjoys interactive play and snuggles. Fully vaccinated and priced at $800, she's the perfect fit for cat lovers who appreciate an intelligent, engaging, and sociable feline companion.",
-//         "vaccinated_status": "Fully",
-//         "pet_name": "Mia"
-//     }
 
-// }
 
 
 const laodDetails = async (petId) => {
@@ -286,7 +210,7 @@ const loadCategoryPets = (id) => {
     console.log(id);
     
 
-    document.getElementById("loading-spiner").style.display = "block"
+    // document.getElementById("loading-spiner").style.display = "block"
 
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
 
@@ -319,7 +243,7 @@ const displayCategories = (categories) => {
 
 
     categories.forEach((item) => {
-        document.getElementById("loading-spiner").style.display = "none"
+        // document.getElementById("loading-spiner").style.display = "none"
 
         // console.log(item);
         // console.log(item.category);
@@ -369,20 +293,6 @@ const loadPets = () => {
 
 }
 
-// const petsDemo={
-
-//         "petId": 12,
-//         "breed": "Poodle",
-//         "category": "Dog",
-//         "date_of_birth": "2023-08-10",
-//         "price": 1500,
-//         "image": "https://i.ibb.co.com/R9ZHvDD/pet-12.jpg",
-//         "gender": "Female",
-//         "pet_details": "This elegant female Poodle, born on August 10, 2023, is intelligent and eager to learn. Fully vaccinated and priced at $1500, she's perfect for families looking for a trainable and loving companion.",
-//         "vaccinated_status": "Fully",
-//         "pet_name": "Chloe"
-
-// }]]]
 
 let sortedPrices=[];
 
@@ -405,27 +315,7 @@ const displaySortWise=()=>{
     console.log(sortedPrices);
     const petsContainer = document.getElementById("pets-section");
 
-    // if (allPets.length === 0) {
-    //     petsContainer.classList.remove("grid", "md:w-4/5")
-    //     petsContainer.innerHTML = `
-    //     <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
-
-    //     <img class="mx-auto" src="images/error.webp">
-
-    //     <div class="flex flex-col text-center content-center justify-center">
-
-    //     <h1 class="font-bold mt-3 text-3xl">No Information Available</h1>
-    //     <p class="">Sorry, we don't have any information  about this page.<br> We will Update this page as soon as we get information . Thank You. </p>
-    //     </div>
-
-    //     </div>
-        
-    //     `
-    //     return;
-    // }
-    // else {
-    //     petsContainer.classList.add("grid", "md:w-4/5")
-    // }
+   
 
     petsContainer.innerHTML = "";
 
@@ -433,7 +323,7 @@ const displaySortWise=()=>{
 
       insideAllPets(pets)
 
-        document.getElementById("loading-spiner").style.display = "none";
+        // document.getElementById("loading-spiner").style.display = "none";
 
 
         // create a card
@@ -516,7 +406,8 @@ const displayCatagoryWisePet=(iPets)=>{
     const petsContainer = document.getElementById("pets-section");
 
     if (iPets.length === 0) {
-        petsContainer.classList.remove("grid", "md:w-4/5")
+        petsContainer.classList.add("justify-center" )
+        petsContainer.classList.remove("grid", )
         petsContainer.innerHTML = `
         <div class=" rounded-xl p-7 bg-[#13131330] items-center w-full">
 
@@ -541,9 +432,7 @@ const displayCatagoryWisePet=(iPets)=>{
 
     iPets.forEach((pets) => {
 
-    //   insideAllPets(pets)
-
-        document.getElementById("loading-spiner").style.display = "none";
+    
 
 
         // create a card
@@ -616,8 +505,12 @@ const displayCatagoryWisePet=(iPets)=>{
 }
 
 
+
+
 // display all pets
 const displayPets = () => {
+        // document.getElementById("loading-spiner").style.display = "none";
+
     console.log(allPets);
     // sortClicked()
     
@@ -654,7 +547,7 @@ const displayPets = () => {
 
       insideAllPets(pets)
 
-        document.getElementById("loading-spiner").style.display = "none";
+        // document.getElementById("loading-spiner").style.display = "none";
 
 
         // create a card
@@ -674,7 +567,7 @@ const displayPets = () => {
     
    <div class="flex gap-2 mt-2 justify-items-center">
     <img class="h-5 mt-[1.5px]" src="https://img.icons8.com/?size=100&id=n7o8YSGnhNnQ&format=png&color=000000" >
-    <p class="text-center ">Breed: ${pets.breed}</p>
+    <p class="">Breed: ${pets.breed}</p>
    </div>
 
    <div class="flex gap-2 mt-2">
@@ -699,7 +592,7 @@ const displayPets = () => {
         <button onclick="testPetImage('${pets.image}')" id="like-btn" class="btn"><img class="h-5" src="https://img.icons8.com/?size=100&id=114011&format=png&color=000000" > </button>
      
 
-        <button id="${pets.petId}" onclick="adoptBtnClicked(${pets.petId}); disableBtbFn()" class="border-[2px] 
+        <button id="${pets.petId}" onclick="adoptBtnClicked(${pets.petId}); " class="border-[2px] 
         border-[#d6e9ea] font-bold text-[#0E7A81] rounded-lg w-24 h-10  disabled:bg-gray-400 disabled:cursor-not-allowed" >Adopt</button>
 
         <button onclick="laodDetails(${pets.petId})" id="dettails-btn" class="border-[2px] 
@@ -723,25 +616,18 @@ const displayPets = () => {
 
     })
 
+    
+
 }
 
-// const disableBtbFn=()=>{
-//     document.getElementById("adopt-btn-main").disabled = true;
 
-// }
 
 function disableBtbFn() {
     document.getElementById("adopt-btn-main").disabled = true;
 
 }
 
-// const sortBtnFn=(prices)=>{
-//     // console.log("sortedd");
-//     // console.log(prices.price);
 
-
-
-// }
 
 const insideAllPets = (data) => {
     // console.log(data);

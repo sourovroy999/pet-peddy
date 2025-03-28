@@ -99,14 +99,16 @@
     </div>
 
     <!-- all pets card -->
-    <main class="w-11/12 flex mx-auto justify-center mt-10">
+    <main class="w-full flex mt-10">
 
-        <section class=" flex flex-col-reverse md:flex-row  gap-5">
+        <section class="justify-center mx-auto flex flex-col-reverse md:flex-row  gap-5">
             <div id="pets-section"
-                class="sm:w-11/12 md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+                class=" sm:w-10/12 md:w-4/6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 h-fit">
             </div>
 
-            <div id="selected-pet-section" class="h-72  sm:w-full md:w-1/5  ">
+            <!-- selected pet section -->
+
+            <div id="selected-pet-section" class=" ">
 
 
             </div>
@@ -155,13 +157,58 @@
   </div>
 </dialog>
 
-    <div id="loading-spiner" class="loading-spiner ">
-        <img class="h-28 mx-auto items-center -my-11 justify-center text-center" src="images/spinner.gif" alt="">
-    </div>
+    <!-- <div id="loading-spiner" class="loading-spiner ">
+        <img id="loading-img" class="h-28 mx-auto items-center -my-11 justify-center text-center" src="images/spinner.gif" alt="">
+    </div> -->
+
+    <footer class="footer mt-20 sm:footer-horizontal bg-neutral text-neutral-content p-10">
+
+        
+
+        <nav>
+          <div class="navbar-start gap-2">
+            <img src="images/logo.webp" alt="">
+            <div class="font-bold latto">Peddy</div>
+        </div>
+         <p>Location: av. Washington 165, NY CA 54003</p>
+         <p>Phone: +31 85 964 47 25</p>
+         <p>Email: info@yourdomain.com</p>
+         <p>Openings hours: 9.00 AM - 5.00 PM</p>
+         <div class="flex">
+            <img class="h-10" src="https://img.icons8.com/?size=100&id=118497&format=png&color=000000" alt="">
+            <img class="h-10" src="https://img.icons8.com/?size=100&id=13963&format=png&color=000000" alt="">
+            <img class="h-10" src="https://img.icons8.com/?size=100&id=19318&format=png&color=000000" alt="">
+            <img class="h-10" src="https://img.icons8.com/?size=100&id=32323&format=png&color=000000" alt="">
+         </div>
+        </nav>
+
+        <nav>
+
+            <h6 class="footer-title">Useful Links</h6>
+            <a class="link link-hover">Home</a>
+            <a class="link link-hover">About us</a>
+            <a class="link link-hover">Animals</a>
+            <a class="link link-hover">Foundation</a>
+            <a class="link link-hover">Contact</a>
+          </nav>
+       
+        <nav>
+          <h6 class="footer-title">Drop a Message</h6>
+          <label class="input validator">
+            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></g></svg>
+            <input type="email" placeholder="mail@site.com" required/>
+          </label>
+          <div class="validator-hint hidden">Enter valid email address</div>
+          <button class="btn w-24 btn-error">Subscribe</button>
+
+
+          
+        </nav>
+      </footer>
 
 
 
-    <script src="JS/appFinal.js"></script>
+    <script src="JS/appFinalFull.js"></script>
 </body>
 
 </html>
